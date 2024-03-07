@@ -1,0 +1,14 @@
+{
+  "extensionName": { "message": "TST Auto Sticky Tabs" },
+  "extensionDescription": { "message": "Tree Style Tabで、特定の状態のタブを自動的にタブの端に貼り付けられるようにします。" },
+
+  "config_autoStickyTab_caption":           { "message": "以下のタブが画面外にスクロールアウトしたときにタブバーの端に貼り付ける" },
+  "config_stickyActiveTab_label":           { "message": "現在のタブ" },
+  "config_stickyPreviouslyActiveTab_label": { "message": "直前まで見ていたタブ" },
+  "config_stickySoundPlayingTab_label":     { "message": "音声を再生中のタブ" },
+  "config_stickySharingTab_label":          { "message": "カメラ/マイク/画面を共有中のタブ" },
+
+  "config_debug_caption": { "message": "開発用" },
+  "config_debug_label": { "message": "デバッグモード" },
+  "config_all_caption": { "message": "すべての設定" }
+}
