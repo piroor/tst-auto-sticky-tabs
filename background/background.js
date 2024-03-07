@@ -7,14 +7,14 @@
 
 import {
   configs,
-  log,
+  //log,
 } from '/common/common.js';
 
 const TST_ID = 'treestyletab@piro.sakura.ne.jp';
 
 async function registerToTST() {
   try {
-    const base = `moz-extension://${location.host}`;
+    //const base = `moz-extension://${location.host}`;
 
     await browser.runtime.sendMessage(TST_ID, {
       type: 'register-self',
