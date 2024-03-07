@@ -24,6 +24,10 @@ async function registerToTST() {
       allowBulkMessaging: true,
       lightTree: true,
     });
+    updateAutoStickyActive();
+    updateAutoStickyPreviouslyActive();
+    updateAutoStickySoundPlaying();
+    updateAutoStickySharing();
   }
   catch(_error) {
     // TST is not available
@@ -85,16 +89,16 @@ function updateAutoStickySoundPlaying(windowId) {
 function updateAutoStickySharing(windowId) {
   if (configs.stickySharingTab) {
     browser.runtime.sendMessage(TST_ID, {
-      type:   'register-auto-sticky-states',
+      type:  'register-auto-sticky-states',
       windowId,
-      states: ['sharing-camera', 'sharing-microphone', 'sharing-screen'],
+      state: ['sharing-camera', 'sharing-microphone', 'sharing-screen'],
     });
   }
   else {
     browser.runtime.sendMessage(TST_ID, {
-      type:   'unregister-auto-sticky-states',
+      type:  'unregister-auto-sticky-states',
       windowId,
-      states: ['sharing-camera', 'sharing-microphone', 'sharing-screen'],
+      state: ['sharing-camera', 'sharing-microphone', 'sharing-screen'],
     });
   }
 }
