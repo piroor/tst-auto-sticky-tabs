@@ -1,6 +1,6 @@
 {
   "extensionName": { "message": "TST Auto Sticky Tabs" },
-  "extensionDescription": { "message": "Tree Style Tabで、特定の状態のタブを自動的にタブの端に貼り付けられるようにします。" },
+  "extensionDescription": { "message": "Tree Style Tabで、特定の状態のタブを自動的にタブバーの端に貼り付けられるようにします。" },
 
   "config_autoStickyTab_caption":           { "message": "以下のタブが画面外にスクロールアウトしたときにタブバーの端に貼り付ける" },
   "config_stickyActiveTab_label":           { "message": "現在のタブ" },
