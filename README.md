@@ -8,12 +8,15 @@
 ----
 
 Provides ability to stick some state tabs to tab bar edges automatically, for Tree Style Tab.
-This depends on TST 4.0 and later.
+
+TST 4.0 and later has ability to stick arbitrary tabs to tab bar edges manually via a tab context menu command or a keyboard shortcut. This helper addon sticks some state tabs automatically: active tabs, sound playing tabs, and tabs sharing camera/microphone/screen.
 
 <strong>This is a helper addon for the <a href="https://addons.mozilla.org/firefox/addon/tree-style-tab/">Tree Style Tab</a> 4.0 and later.</strong>
 ----
 
 Tree Style Tabで、特定の状態のタブを自動的にタブの端に貼り付けられるようにします。
+
+TST 4.0以降のバージョンでは、コンテキストメニューのコマンドまたはキーボードショートカットを用いて、任意のタブをタブバー端に貼り付けられるようになりました。このアドオンは、特定の状態のタブ（現在のタブ、音声を再生中のタブ、カメラ/マイク/画面を共有中のタブ）を自動的にタブバー端に貼り付けられるようにします。
 
 <strong>このアドオンは<a href="https://addons.mozilla.org/firefox/addon/tree-style-tab/">Tree Style Tab</a> 4.0以降用のヘルパーアドオンです。</strong>
 
