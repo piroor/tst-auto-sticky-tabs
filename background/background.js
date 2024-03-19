@@ -8,13 +8,14 @@
 import {
   configs,
   //log,
+  TST_ID,
+  WS_ID,
+  callTSTAPI,
 } from '/common/common.js';
-
-const TST_ID = 'treestyletab@piro.sakura.ne.jp';
 
 async function registerToTST() {
   try {
-    await browser.runtime.sendMessage(TST_ID, {
+    await callTSTAPI({
       type: 'register-self',
       name: browser.i18n.getMessage('extensionName'),
       //icons: browser.runtime.getManifest().icons,
@@ -37,14 +38,14 @@ configs.$loaded.then(registerToTST);
 
 function updateAutoStickyActive(windowId) {
   if (configs.stickyActiveTab) {
-    browser.runtime.sendMessage(TST_ID, {
+    callTSTAPI({
       type:  'register-auto-sticky-states',
       windowId,
       state: 'active',
     });
   }
   else {
-    browser.runtime.sendMessage(TST_ID, {
+    callTSTAPI({
       type:  'unregister-auto-sticky-states',
       windowId,
       state: 'active',
@@ -54,14 +55,14 @@ function updateAutoStickyActive(windowId) {
 
 function updateAutoStickyPreviouslyActive(windowId) {
   if (configs.stickyPreviouslyActiveTab) {
-    browser.runtime.sendMessage(TST_ID, {
+    callTSTAPI({
       type:  'register-auto-sticky-states',
       windowId,
       state: 'previously-active',
     });
   }
   else {
-    browser.runtime.sendMessage(TST_ID, {
+    callTSTAPI({
       type:  'unregister-auto-sticky-states',
       windowId,
       state: 'previously-active',
@@ -71,14 +72,14 @@ function updateAutoStickyPreviouslyActive(windowId) {
 
 function updateAutoStickySoundPlaying(windowId) {
   if (configs.stickySoundPlayingTab) {
-    browser.runtime.sendMessage(TST_ID, {
+    callTSTAPI({
       type:  'register-auto-sticky-states',
       windowId,
       state: 'sound-playing',
     });
   }
   else {
-    browser.runtime.sendMessage(TST_ID, {
+    callTSTAPI({
       type:  'unregister-auto-sticky-states',
       windowId,
       state: 'sound-playing',
@@ -88,14 +89,14 @@ function updateAutoStickySoundPlaying(windowId) {
 
 function updateAutoStickySharing(windowId) {
   if (configs.stickySharingTab) {
-    browser.runtime.sendMessage(TST_ID, {
+    callTSTAPI({
       type:  'register-auto-sticky-states',
       windowId,
       state: ['sharing-camera', 'sharing-microphone', 'sharing-screen'],
     });
   }
   else {
-    browser.runtime.sendMessage(TST_ID, {
+    callTSTAPI({
       type:  'unregister-auto-sticky-states',
       windowId,
       state: ['sharing-camera', 'sharing-microphone', 'sharing-screen'],
@@ -129,6 +130,7 @@ configs.$addObserver(key => {
 function onMessageExternal(message, sender) {
   switch (sender.id) {
     case TST_ID:
+    case WS_ID:
       if (message && message.messages) {
         for (const oneMessage of message.messages) {
           onMessageExternal(oneMessage, sender);
@@ -157,14 +159,14 @@ const mPreviouslyActiveTabs = new Map();
 browser.tabs.onActivated.addListener(activeInfo => {
   const lastTabId = mPreviouslyActiveTabs.get(activeInfo.windowId);
   if (lastTabId) {
-    browser.runtime.sendMessage(TST_ID, {
+    callTSTAPI({
       type:   'remove-tab-state',
       tabs:   [lastTabId],
       states: ['previously-active'],
     });
   }
   mPreviouslyActiveTabs.set(activeInfo.windowId, activeInfo.previousTabId);
-  browser.runtime.sendMessage(TST_ID, {
+  callTSTAPI({
     type:   'add-tab-state',
     tabs:   [activeInfo.previousTabId],
     states: ['previously-active'],
