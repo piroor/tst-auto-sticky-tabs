@@ -156,16 +156,28 @@ browser.runtime.onMessageExternal.addListener(onMessageExternal);
 
 const mPreviouslyActiveTabs = new Map();
 
-browser.tabs.onActivated.addListener(activeInfo => {
-  const lastTabId = mPreviouslyActiveTabs.get(activeInfo.windowId);
-  if (lastTabId) {
+browser.tabs.onActivated.addListener(async activeInfo => {
+  const [newActiveTab, previousActiveTab] = await Promise.all([
+    browser.tabs.get(activeInfo.tabId),
+    browser.tabs.get(activeInfo.previousTabId),
+  ]);
+  const lastTabIds = mPreviouslyActiveTabs.get(activeInfo.windowId) || new Set();
+  if (lastTabIds.size > 0 &&
+      (!configs.stickyPreviouslyActiveTabExceptPinned ||
+       (!newActiveTab?.pinned &&
+        !previousActiveTab?.pinned))) {
     callTSTAPI({
       type:   'remove-tab-state',
-      tabs:   [lastTabId],
+      tabs:   [...lastTabIds],
       states: ['previously-active'],
     });
+    lastTabIds.clear();
+    mPreviouslyActiveTabs.delete(activeInfo.windowId);
   }
-  mPreviouslyActiveTabs.set(activeInfo.windowId, activeInfo.previousTabId);
+  lastTabIds.add(activeInfo.previousTabId);
+  mPreviouslyActiveTabs.set(activeInfo.windowId, lastTabIds);
+  if (previousActiveTab?.pinned)
+    return;
   callTSTAPI({
     type:   'add-tab-state',
     tabs:   [activeInfo.previousTabId],

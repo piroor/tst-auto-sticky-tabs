@@ -5,6 +5,7 @@
   "config_autoStickyTab_caption":           { "message": "以下のタブが画面外にスクロールアウトしたときにタブバーの端に貼り付ける" },
   "config_stickyActiveTab_label":           { "message": "現在のタブ" },
   "config_stickyPreviouslyActiveTab_label": { "message": "直前まで見ていたタブ" },
+  "config_stickyPreviouslyActiveTabExceptPinned_label": { "message": "ピン留めされたタブがアクティブになるときは「直前まで見ていた」タブの状態を更新しない" },
   "config_stickySoundPlayingTab_label":     { "message": "音声を再生中のタブ" },
   "config_stickySharingTab_label":          { "message": "カメラ/マイク/画面を共有中のタブ" },
 
