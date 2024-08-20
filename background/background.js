@@ -174,10 +174,10 @@ browser.tabs.onActivated.addListener(async activeInfo => {
     lastTabIds.clear();
     mPreviouslyActiveTabs.delete(activeInfo.windowId);
   }
-  lastTabIds.add(activeInfo.previousTabId);
   mPreviouslyActiveTabs.set(activeInfo.windowId, lastTabIds);
   if (previousActiveTab?.pinned)
     return;
+  lastTabIds.add(activeInfo.previousTabId);
   callTSTAPI({
     type:   'add-tab-state',
     tabs:   [activeInfo.previousTabId],
