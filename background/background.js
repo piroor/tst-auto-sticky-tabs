@@ -161,23 +161,20 @@ browser.tabs.onActivated.addListener(async activeInfo => {
     browser.tabs.get(activeInfo.tabId),
     browser.tabs.get(activeInfo.previousTabId),
   ]);
-  const lastTabIds = mPreviouslyActiveTabs.get(activeInfo.windowId) || new Set();
-  if (lastTabIds.size > 0 &&
+  const lastTabIds = mPreviouslyActiveTabs.get(activeInfo.windowId) || [];
+  if (lastTabIds.length > 0 &&
       (!configs.stickyPreviouslyActiveTabExceptPinned ||
-       (!newActiveTab?.pinned &&
-        !previousActiveTab?.pinned))) {
+       !newActiveTab?.pinned)) {
     callTSTAPI({
       type:   'remove-tab-state',
-      tabs:   [...lastTabIds],
+      tabs:   [activeInfo.tabId, lastTabIds.shift()],
       states: ['previously-active'],
     });
-    lastTabIds.clear();
-    mPreviouslyActiveTabs.delete(activeInfo.windowId);
   }
   mPreviouslyActiveTabs.set(activeInfo.windowId, lastTabIds);
   if (previousActiveTab?.pinned)
     return;
-  lastTabIds.add(activeInfo.previousTabId);
+  lastTabIds.push(activeInfo.previousTabId);
   callTSTAPI({
     type:   'add-tab-state',
     tabs:   [activeInfo.previousTabId],
