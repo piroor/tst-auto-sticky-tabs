@@ -190,6 +190,17 @@ browser.tabs.onActivated.addListener(async activeInfo => {
   });
 });
 
+browser.tabs.onRemoved.addListener((tabId, removeInfo) => {
+  const lastTabIds = mPreviouslyActiveTabs.get(removeInfo.windowId);
+  if (!lastTabIds)
+    return;
+  const index = lastTabIds.indexOf(tabId);
+  if (index < 0)
+    return;
+  lastTabIds.splice(index, 1);
+  mPreviouslyActiveTabs.set(removeInfo.windowId, lastTabIds);
+});
+
 browser.windows.onRemoved.addListener(windowId => {
   mPreviouslyActiveTabs.delete(windowId);
 });
