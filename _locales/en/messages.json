@@ -8,6 +8,7 @@
   "config_stickyPreviouslyActiveTabExceptPinned_label": { "message": "Never clear \"previously active\" state of tabs while pinned tabs are activated" },
   "config_stickySoundPlayingTab_label":     { "message": "Sound Playing Tabs" },
   "config_stickySharingTab_label":          { "message": "Tabs Sharing Camera/Microphone/Screen" },
+  "config_allowScrollToActivatedStickedTab_label": { "message": "Scroll to the original location of the tab when a sticked tab is activated" },
 
   "config_debug_caption": { "message": "Development" },
   "config_debug_label": { "message": "Debug mode" },

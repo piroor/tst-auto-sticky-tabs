@@ -21,6 +21,7 @@ async function registerToTST() {
       //icons: browser.runtime.getManifest().icons,
       listeningTypes: [
         'sidebar-show',
+        'try-scroll-to-activated-tab',
       ],
       allowBulkMessaging: true,
       lightTree: true,
@@ -147,6 +148,13 @@ function onMessageExternal(message, sender) {
           updateAutoStickyPreviouslyActive(message.windowId);
           updateAutoStickySoundPlaying(message.windowId);
           updateAutoStickySharing(message.windowId);
+          break;
+
+        case 'try-scroll-to-activated-tab':
+          if (!configs.allowScrollToActivatedStickedTab &&
+              message.tab.states.includes('sticked')) {
+            return Promise.resolve(true);
+          }
           break;
       }
       break;

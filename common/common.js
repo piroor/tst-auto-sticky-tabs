@@ -13,6 +13,7 @@ export const configs = new Configs({
   stickyPreviouslyActiveTabExceptPinned: true,
   stickySoundPlayingTab: true,
   stickySharingTab: true,
+  allowScrollToActivatedStickedTab: false,
 
   TSTID: null,
 

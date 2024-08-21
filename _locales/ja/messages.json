@@ -8,6 +8,7 @@
   "config_stickyPreviouslyActiveTabExceptPinned_label": { "message": "ピン留めされたタブがアクティブになるときは「直前まで見ていた」タブの状態を更新しない" },
   "config_stickySoundPlayingTab_label":     { "message": "音声を再生中のタブ" },
   "config_stickySharingTab_label":          { "message": "カメラ/マイク/画面を共有中のタブ" },
+  "config_allowScrollToActivatedStickedTab_label": { "message": "タブバーの端に貼り付いたタブがアクティブになったときに元の位置までタブバーをスクロールする" },
 
   "config_debug_caption": { "message": "開発用" },
   "config_debug_label": { "message": "デバッグモード" },
