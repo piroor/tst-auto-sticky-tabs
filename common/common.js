@@ -9,7 +9,7 @@ import Configs from '/extlib/Configs.js';
 
 export const configs = new Configs({
   stickyActiveTab: true,
-  stickyPreviouslyActiveTab: false,
+  stickyPreviouslyActiveTab: true,
   stickyPreviouslyActiveTabExceptPinned: true,
   stickySoundPlayingTab: true,
   stickySharingTab: true,
