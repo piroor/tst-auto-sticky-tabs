@@ -163,7 +163,7 @@ function onMessageExternal(message, sender) {
 
         case 'try-scroll-to-activated-tab':
           if (!configs.allowScrollToActivatedStickedTab &&
-              message.tab.states.includes('sticked')) {
+              message.tab.states.includes('stuck')) {
             return Promise.resolve(true);
           }
           break;
