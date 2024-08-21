@@ -13,6 +13,8 @@ import {
   callTSTAPI,
 } from '/common/common.js';
 
+const mPreviouslyActiveTabs = new Map();
+
 async function registerToTST() {
   try {
     await callTSTAPI({
@@ -26,6 +28,15 @@ async function registerToTST() {
       allowBulkMessaging: true,
       lightTree: true,
     });
+    const windows = await browser.windows.getAll({});
+    await Promise.all(windows.map(async window => {
+      const lastTabIds = await browser.sessions.setWindowValue(window.id, 'previously-active-tabs');
+      if (!lastTabIds)
+        return;
+      mPreviouslyActiveTabs.set(window.id, lastTabIds);
+      // We don't need to set states here, because we should not set previously-active state for restored windows.
+      // This is just for cases when this addon is reloaded or updated while Firefox is running.
+    }));
     updateAutoStickyActive();
     updateAutoStickyPreviouslyActive();
     updateAutoStickySoundPlaying();
@@ -162,8 +173,6 @@ function onMessageExternal(message, sender) {
 }
 browser.runtime.onMessageExternal.addListener(onMessageExternal);
 
-const mPreviouslyActiveTabs = new Map();
-
 browser.tabs.onActivated.addListener(async activeInfo => {
   const [newActiveTab, previousActiveTab] = await Promise.all([
     browser.tabs.get(activeInfo.tabId),
@@ -188,6 +197,7 @@ browser.tabs.onActivated.addListener(async activeInfo => {
     tabs:   [activeInfo.previousTabId],
     states: ['previously-active'],
   });
+  browser.sessions.setWindowValue(activeInfo.windowId, 'previously-active-tabs', lastTabIds);
 });
 
 browser.tabs.onRemoved.addListener((tabId, removeInfo) => {
