@@ -30,7 +30,7 @@ async function registerToTST() {
     });
     const windows = await browser.windows.getAll({});
     await Promise.all(windows.map(async window => {
-      const lastTabIds = await browser.sessions.setWindowValue(window.id, 'previously-active-tabs');
+      const lastTabIds = await browser.sessions.getWindowValue(window.id, 'previously-active-tabs');
       if (!lastTabIds)
         return;
       mPreviouslyActiveTabs.set(window.id, lastTabIds);
