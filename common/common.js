@@ -8,12 +8,12 @@
 import Configs from '/extlib/Configs.js';
 
 export const configs = new Configs({
-  stickyActiveTab: true,
-  stickyPreviouslyActiveTab: true,
+  stickyActiveTab:                       true,
+  stickyPreviouslyActiveTab:             true,
   stickyPreviouslyActiveTabExceptPinned: true,
-  stickySoundPlayingTab: true,
-  stickySharingTab: true,
-  allowScrollToActivatedStickedTab: false,
+  stickySoundPlayingTab:                 true,
+  stickySharingTab:                      true,
+  allowScrollToActivatedStickedTab:      false,
 
   TSTID: null,
 
@@ -24,8 +24,7 @@ export const configs = new Configs({
   ]
 });
 
-export function log(...args)
-{
+export function log(...args) {
   if (!configs.debug)
     return;
 

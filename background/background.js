@@ -18,15 +18,15 @@ const mPreviouslyActiveTabs = new Map();
 async function registerToTST() {
   try {
     await callTSTAPI({
-      type: 'register-self',
-      name: browser.i18n.getMessage('extensionName'),
+      type:           'register-self',
+      name:           browser.i18n.getMessage('extensionName'),
       //icons: browser.runtime.getManifest().icons,
       listeningTypes: [
         'sidebar-show',
         'try-scroll-to-activated-tab',
       ],
       allowBulkMessaging: true,
-      lightTree: true,
+      lightTree:          true,
     });
     const windows = await browser.windows.getAll({});
     await Promise.all(windows.map(async window => {
